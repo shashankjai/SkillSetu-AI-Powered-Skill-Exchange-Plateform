@@ -22,16 +22,11 @@ import {
   ChevronUp,
   RotateCcw,
   Search,
-  Code,
   GraduationCap,
   FileText,
-  Zap,
   Check,
-  ArrowRight,
-  BookMarked,
   BrainCircuit,
   ListCheck,
-  CheckSquare,
 } from "lucide-react";
 
 const API_URL = import.meta.env.VITE_API_URL?.replace(/\/$/, "") || "";
@@ -541,21 +536,21 @@ const RoadmapPage = () => {
                   {/* Roadmap Overview Card */}
                   <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xl md:p-8">
                     <div className="mb-4 flex flex-wrap items-center gap-2">
-                      <span className="rounded-full bg-slate-100 border border-slate-300 px-3 py-1 text-xs font-bold uppercase tracking-wider text-slate-700">
+                      <span className="rounded-full bg-slate-100 border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700">
                         {currentRoadmap.currentLevel} Level
                       </span>
-                      <span className="rounded-full bg-slate-100 border border-slate-200 px-3 py-1 text-xs font-medium text-slate-700">
+                      <span className="rounded-full bg-slate-100 border border-slate-200 px-3 py-1.5 text-sm font-medium text-slate-700">
                         <Clock size={12} className="mr-1 inline text-teal-700" />
                         {currentRoadmap.studyTime}
                       </span>
                       {currentRoadmap.learningGoal && (
-                        <span className="rounded-full bg-emerald-500/15 border border-emerald-500/30 px-3 py-1 text-xs font-medium text-emerald-700">
+                        <span className="rounded-full bg-emerald-500/15 border border-emerald-500/30 px-3 py-1.5 text-sm font-medium text-emerald-700">
                           <Target size={12} className="mr-1 inline text-emerald-600" />
                           {currentRoadmap.learningGoal}
                         </span>
                       )}
                       {currentRoadmap.existingKnowledge && (
-                        <span className="rounded-full bg-slate-100 border border-slate-300 px-3 py-1 text-xs font-medium text-slate-700">
+                        <span className="rounded-full bg-slate-100 border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-700">
                           <GraduationCap size={12} className="mr-1 inline text-teal-700" />
                           Prereqs: {currentRoadmap.existingKnowledge}
                         </span>
@@ -567,7 +562,7 @@ const RoadmapPage = () => {
                     </h2>
 
                     {currentRoadmap.summary && (
-                      <p className="mt-3 text-sm text-slate-700 leading-relaxed border-l-2 border-slate-300 pl-3">
+                      <p className="mt-3 text-base leading-relaxed text-slate-700 border-l-2 border-slate-300 pl-3">
                         {currentRoadmap.summary}
                       </p>
                     )}
@@ -578,11 +573,11 @@ const RoadmapPage = () => {
                         <div className="mb-2 flex items-center justify-between">
                           <div className="flex items-center gap-2">
                             <ListCheck size={16} className="text-teal-700" />
-                            <span className="text-xs font-bold text-slate-900">
+                            <span className="text-sm font-semibold text-slate-900">
                               Topic Mastery Tracker
                             </span>
                           </div>
-                          <span className="text-xs font-bold text-slate-700">
+                          <span className="text-sm font-semibold text-slate-700">
                             {completedTopicsCount} / {totalTopicsCount} topics ({progressPercentage}%)
                           </span>
                         </div>
@@ -599,7 +594,7 @@ const RoadmapPage = () => {
                   {/* Phase explorer: navigator on the left, ONE phase at a time on the right (no endless scrolling) */}
                   <div className="grid items-start gap-6 lg:grid-cols-[300px_minmax(0,1fr)]">
                     <nav aria-label="Roadmap phases" className="rounded-2xl border border-slate-200 bg-white p-4 lg:sticky lg:top-24">
-                      <h3 className="mb-3 flex items-center gap-2 px-1 font-mono text-[11px] uppercase tracking-[0.18em] text-teal-700">
+                      <h3 className="mb-3 flex items-center gap-2 px-1 text-sm font-semibold text-slate-700">
                         <Layers size={14} /> Curriculum ({currentRoadmap.phases?.length || 0} phases)
                       </h3>
                       <ol className="relative space-y-1.5">
@@ -622,8 +617,8 @@ const RoadmapPage = () => {
                                   {pct === 100 ? <Check size={15} /> : ph.phaseNumber || i + 1}
                                 </span>
                                 <span className="min-w-0 flex-1">
-                                  <span className="block truncate text-sm font-semibold text-slate-900">{ph.title}</span>
-                                  <span className="mt-0.5 block text-xs text-slate-600">{ph.duration}</span>
+                                  <span className="block truncate text-base font-semibold text-slate-900">{ph.title}</span>
+                                  <span className="mt-1 block text-sm text-slate-600">{ph.duration}</span>
                                   <span className="mt-2 block h-1 w-full overflow-hidden rounded-full bg-slate-200">
                                     <span className="block h-full rounded-full bg-teal-700 transition-all duration-500" style={{ width: `${pct}%` }} />
                                   </span>
@@ -667,50 +662,43 @@ const RoadmapPage = () => {
                           {/* Phase Header (Accordion Toggle) */}
                           <button
                             type="button"
-                            className="flex w-full cursor-default items-center justify-between p-5 text-left"
+                            className="flex w-full cursor-default items-center justify-between gap-4 px-5 py-5 text-left md:px-6"
                           >
                             <div className="flex items-center gap-4">
-                              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-slate-300 bg-slate-100 text-base font-black text-slate-700">
+                              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-blue-50 text-lg font-semibold text-slate-800">
                                 {phase.phaseNumber || pIdx + 1}
                               </span>
                               <div>
-                                <h4 className="text-base font-extrabold text-slate-900 md:text-lg">
+                                <h4 className="text-lg font-semibold leading-snug text-slate-900 md:text-xl">
                                   {phase.title}
                                 </h4>
-                                <div className="flex items-center gap-2 mt-0.5">
-                                  <span className="text-xs font-medium text-slate-700">
-                                    <Clock size={11} className="mr-1 inline" />
-                                    {phase.duration}
-                                  </span>
+                                <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">
+                                  <span className="text-sm text-slate-600">{phase.duration}</span>
                                   {(phase.topics || []).length > 0 && (
-                                    <span className="rounded-full bg-slate-100 px-2 py-0.5 font-mono text-[11px] text-slate-600">
+                                    <span className="text-sm text-slate-500">
                                       {doneInPhase}/{phase.topics.length} topics
                                     </span>
                                   )}
                                 </div>
                               </div>
                             </div>
-                            <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-slate-500">Phase {phase.phaseNumber || pIdx + 1} of {currentRoadmap.phases.length}</span>
+                            <span className="shrink-0 text-xs font-medium text-slate-500 md:text-sm">Phase {phase.phaseNumber || pIdx + 1} of {currentRoadmap.phases.length}</span>
                           </button>
 
                           {/* Phase Detail Content */}
                           {isExpanded && (
-                            <div className="grid gap-5 border-t border-slate-200 bg-[#FFFEFC]/40 p-5 md:grid-cols-2">
+                            <div className="grid gap-x-7 gap-y-6 border-t border-slate-200 bg-slate-50/50 p-5 md:grid-cols-2 md:p-7">
                               {/* Learning Objectives */}
                               {phase.learningObjectives?.length > 0 && (
                                 <div>
-                                  <h5 className="mb-2 text-xs font-bold uppercase tracking-wider text-slate-600 flex items-center gap-1.5">
-                                    <Target size={14} className="text-teal-700" />
-                                    Learning Objectives
-                                  </h5>
-                                  <ul className="space-y-1.5">
+                                  <h5 className="mb-3 text-base font-semibold text-slate-900">Learning objectives</h5>
+                                  <ul className="space-y-2 pl-5">
                                     {phase.learningObjectives.map((obj, oIdx) => (
                                       <li
                                         key={`obj-${oIdx}`}
-                                        className="flex items-start gap-2 text-[13px] leading-relaxed text-slate-900"
+                                        className="list-item list-disc pl-1 text-base leading-relaxed text-slate-700 marker:text-blue-600"
                                       >
-                                        <ArrowRight size={12} className="mt-0.5 shrink-0 text-teal-700" />
-                                        <span>{obj}</span>
+                                        {obj}
                                       </li>
                                     ))}
                                   </ul>
@@ -720,10 +708,7 @@ const RoadmapPage = () => {
                               {/* Core Topics with Checkboxes */}
                               {phase.topics?.length > 0 && (
                                 <div className="md:col-span-2">
-                                  <h5 className="mb-2.5 text-xs font-bold uppercase tracking-wider text-slate-600 flex items-center gap-1.5">
-                                    <BookMarked size={14} className="text-teal-700" />
-                                    Topics & Subtopics
-                                  </h5>
+                                  <h5 className="mb-3 text-base font-semibold text-slate-900">Topics and subtopics</h5>
                                   <div className="grid gap-2 sm:grid-cols-2">
                                     {phase.topics.map((topic, tIdx) => {
                                       const isChecked = completedTopics[`${pIdx}-${tIdx}`];
@@ -731,7 +716,7 @@ const RoadmapPage = () => {
                                         <div
                                           key={`topic-${tIdx}`}
                                           onClick={() => toggleTopicCheck(pIdx, tIdx)}
-                                          className={`flex cursor-pointer items-start gap-2.5 rounded-xl border p-2.5 text-xs transition ${
+                                          className={`flex cursor-pointer items-start gap-3 rounded-xl border p-3.5 text-sm leading-relaxed transition ${
                                             isChecked
                                               ? "border-emerald-500/40 bg-emerald-50 text-emerald-700"
                                               : "border-slate-200 bg-white/60 text-slate-900 hover:border-slate-200"
@@ -757,25 +742,22 @@ const RoadmapPage = () => {
                               {/* Practical Exercises & Coding Questions */}
                               {(phase.practicalExercises?.length > 0 || phase.codingQuestions?.length > 0) && (
                                 <div>
-                                  <h5 className="mb-2 text-xs font-bold uppercase tracking-wider text-slate-600 flex items-center gap-1.5">
-                                    <Zap size={14} className="text-amber-600" />
-                                    Hands-On Exercises & Coding Challenges
-                                  </h5>
+                                  <h5 className="mb-3 text-base font-semibold text-slate-900">Practice and coding challenges</h5>
                                   <div className="space-y-2">
                                     {phase.practicalExercises?.map((ex, eIdx) => (
                                       <div
                                         key={`ex-${eIdx}`}
-                                        className="rounded-xl border border-slate-200 bg-white p-3 text-xs text-slate-900"
+                                        className="rounded-xl border border-slate-200 bg-white p-4 text-sm leading-relaxed text-slate-700"
                                       >
-                                        <strong className="text-amber-700">⚡ Practice:</strong> {ex}
+                                        <strong className="font-semibold text-slate-900">Practice:</strong> {ex}
                                       </div>
                                     ))}
                                     {phase.codingQuestions?.map((q, qIdx) => (
                                       <div
                                         key={`cq-${qIdx}`}
-                                        className="rounded-xl border border-slate-300 bg-slate-100 p-3 text-xs text-slate-700"
+                                        className="rounded-xl border border-slate-200 bg-white p-4 text-sm leading-relaxed text-slate-700"
                                       >
-                                        <strong className="text-slate-700">💻 Coding Question:</strong> {q}
+                                        <strong className="font-semibold text-slate-900">Coding question:</strong> {q}
                                       </div>
                                     ))}
                                   </div>
@@ -785,16 +767,13 @@ const RoadmapPage = () => {
                               {/* Suggested Projects */}
                               {phase.suggestedProjects?.length > 0 && (
                                 <div>
-                                  <h5 className="mb-2 text-xs font-bold uppercase tracking-wider text-slate-600 flex items-center gap-1.5">
-                                    <Code size={14} className="text-teal-700" />
-                                    Phase Project
-                                  </h5>
+                                  <h5 className="mb-3 text-base font-semibold text-slate-900">Phase project</h5>
                                   {phase.suggestedProjects.map((proj, prIdx) => (
                                     <div
                                       key={`proj-${prIdx}`}
-                                      className="rounded-xl border border-slate-300 bg-slate-100 p-3.5 text-xs font-medium text-slate-700"
+                                      className="rounded-xl border border-blue-100 bg-blue-50/70 p-4 text-sm leading-relaxed text-slate-700"
                                     >
-                                      🚀 <strong className="text-slate-900">Project Idea:</strong> {proj}
+                                      <strong className="font-semibold text-slate-900">Project:</strong> {proj}
                                     </div>
                                   ))}
                                 </div>
@@ -802,16 +781,12 @@ const RoadmapPage = () => {
 
                               {/* Checkpoint Criteria */}
                               {phase.checkpointCriteria?.length > 0 && (
-                                <div className="rounded-xl border border-emerald-500/20 bg-emerald-50 p-3.5">
-                                  <h5 className="mb-2 text-xs font-bold uppercase tracking-wider text-emerald-600 flex items-center gap-1.5">
-                                    <CheckSquare size={14} />
-                                    Phase Checkpoint (Readiness Criteria)
-                                  </h5>
-                                  <ul className="space-y-1">
+                                <div className="rounded-xl border border-emerald-200 bg-emerald-50/70 p-4">
+                                  <h5 className="mb-3 text-base font-semibold text-emerald-800">Readiness checkpoint</h5>
+                                  <ul className="space-y-2 pl-5">
                                     {phase.checkpointCriteria.map((chk, cIdx) => (
-                                      <li key={`chk-${cIdx}`} className="flex items-center gap-2 text-xs text-emerald-700">
-                                        <Check size={12} className="text-emerald-600 shrink-0" />
-                                        <span>{chk}</span>
+                                      <li key={`chk-${cIdx}`} className="list-item list-disc pl-1 text-sm leading-relaxed text-emerald-800 marker:text-emerald-600">
+                                        {chk}
                                       </li>
                                     ))}
                                   </ul>
@@ -821,14 +796,11 @@ const RoadmapPage = () => {
                               {/* Recommended Resources */}
                               {phase.recommendedResources?.length > 0 && (
                                 <div>
-                                  <h5 className="mb-1.5 text-xs font-bold uppercase tracking-wider text-slate-600">
-                                    Recommended Learning Resources
-                                  </h5>
-                                  <ul className="space-y-1">
+                                  <h5 className="mb-3 text-base font-semibold text-slate-900">Recommended resources</h5>
+                                  <ul className="space-y-2 pl-5">
                                     {phase.recommendedResources.map((res, rIdx) => (
-                                      <li key={`res-${rIdx}`} className="text-xs text-slate-600 flex items-center gap-1.5">
-                                        <BookOpen size={12} className="text-teal-700 shrink-0" />
-                                        <span>{res}</span>
+                                      <li key={`res-${rIdx}`} className="list-item list-disc pl-1 text-sm leading-relaxed text-slate-700 marker:text-blue-600">
+                                        {res}
                                       </li>
                                     ))}
                                   </ul>
@@ -848,7 +820,7 @@ const RoadmapPage = () => {
                       <div className="flex items-center gap-3 border-b border-slate-200 pb-4">
                         <Award size={32} className="shrink-0 text-teal-700" />
                         <div>
-                          <p className="text-xs font-bold uppercase tracking-wider text-teal-700">
+                          <p className="text-sm font-semibold text-teal-700">
                             Capstone & Mastery Strategy
                           </p>
                           <h3 className="text-xl font-black text-slate-900">
@@ -858,7 +830,7 @@ const RoadmapPage = () => {
                       </div>
 
                       {currentRoadmap.capstoneProject?.description && (
-                        <p className="text-sm text-slate-700 leading-relaxed">
+                        <p className="text-base leading-relaxed text-slate-700">
                           {currentRoadmap.capstoneProject.description}
                         </p>
                       )}
@@ -866,14 +838,14 @@ const RoadmapPage = () => {
                       {/* Capstone Deliverables */}
                       {currentRoadmap.capstoneProject?.deliverables?.length > 0 && (
                         <div>
-                          <h4 className="mb-2 text-xs font-bold uppercase tracking-wider text-teal-700">
+                          <h4 className="mb-3 text-base font-semibold text-slate-900">
                             Capstone Deliverables
                           </h4>
                           <div className="grid gap-2 sm:grid-cols-2">
                             {currentRoadmap.capstoneProject.deliverables.map((del, dIdx) => (
                               <div
                                 key={`del-${dIdx}`}
-                                className="flex items-start gap-2 rounded-xl border border-slate-200 bg-slate-100 p-2.5 text-xs text-teal-700"
+                                className="flex items-start gap-2.5 rounded-xl border border-slate-200 bg-slate-50 p-3.5 text-sm leading-relaxed text-slate-700"
                               >
                                 <CheckCircle2 size={14} className="mt-0.5 shrink-0 text-teal-700" />
                                 <span>{del}</span>
@@ -887,12 +859,12 @@ const RoadmapPage = () => {
                       <div className="grid gap-4 sm:grid-cols-2 pt-2 border-t border-slate-200">
                         {currentRoadmap.selfAssessmentChecklist?.length > 0 && (
                           <div>
-                            <h4 className="mb-2 text-xs font-bold uppercase tracking-wider text-slate-700">
+                            <h4 className="mb-3 text-base font-semibold text-slate-900">
                               Self-Assessment Checklist
                             </h4>
                             <ul className="space-y-1.5">
                               {currentRoadmap.selfAssessmentChecklist.map((item, iIdx) => (
-                                <li key={`sa-${iIdx}`} className="flex items-start gap-2 text-xs text-slate-700">
+                                <li key={`sa-${iIdx}`} className="flex items-start gap-2 text-sm leading-relaxed text-slate-700">
                                   <Check size={13} className="mt-0.5 shrink-0 text-emerald-600" />
                                   <span>{item}</span>
                                 </li>
@@ -903,12 +875,12 @@ const RoadmapPage = () => {
 
                         {currentRoadmap.revisionPlan?.length > 0 && (
                           <div>
-                            <h4 className="mb-2 text-xs font-bold uppercase tracking-wider text-slate-700">
+                            <h4 className="mb-3 text-base font-semibold text-slate-900">
                               Revision & Retention Strategy
                             </h4>
                             <ul className="space-y-1.5">
                               {currentRoadmap.revisionPlan.map((rev, rIdx) => (
-                                <li key={`rev-${rIdx}`} className="flex items-start gap-2 text-xs text-slate-700">
+                                <li key={`rev-${rIdx}`} className="flex items-start gap-2 text-sm leading-relaxed text-slate-700">
                                   <RotateCcw size={13} className="mt-0.5 shrink-0 text-teal-700" />
                                   <span>{rev}</span>
                                 </li>
@@ -921,10 +893,10 @@ const RoadmapPage = () => {
                       {/* Next Recommended Step */}
                       {currentRoadmap.nextRecommendedStep && (
                         <div className="rounded-2xl border border-slate-300 bg-slate-100 p-4">
-                          <p className="text-xs font-bold uppercase tracking-wider text-slate-700">
+                          <p className="text-sm font-semibold text-slate-700">
                             Next Recommended Action
                           </p>
-                          <p className="mt-1 text-xs font-medium text-slate-900">
+                          <p className="mt-1 text-base leading-relaxed text-slate-900">
                             {currentRoadmap.nextRecommendedStep}
                           </p>
                         </div>

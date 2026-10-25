@@ -76,12 +76,12 @@ const Navbar = () => {
           scrolled ? "shadow-[0_6px_18px_-14px_rgba(15,23,42,0.35)]" : ""
         }`}
       >
-        <nav className="mx-auto flex h-[72px] w-full max-w-[1600px] items-center justify-between gap-4 px-5 sm:px-8 lg:px-12" aria-label="Main">
+        <nav className="mx-auto flex h-[72px] w-full max-w-[1600px] items-center justify-between gap-6 px-5 sm:px-8 lg:px-12" aria-label="Main">
           <Link to="/" aria-label="SkillSetu home" className="shrink-0">
             <Logo />
           </Link>
 
-          <ul className="hidden items-center gap-6 xl:gap-8 lg:flex">
+          <ul className="ml-auto hidden items-center gap-6 lg:flex">
             {links.map((l) => (
               <li key={l.to}>
                 <NavLink to={l.to} end={l.to === "/"} className={linkClass}>
@@ -91,7 +91,7 @@ const Navbar = () => {
             ))}
           </ul>
 
-          <div className="hidden items-center gap-3 lg:flex">
+          <div className="hidden items-center gap-6 lg:flex">
             {isAuthenticated ? (
               <>
                 <button

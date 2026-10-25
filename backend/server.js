@@ -168,19 +168,32 @@ const connectWithFallback = async () => {
       const { ADMIN_EMAIL, ADMIN_PASSWORD, ADMIN_NAME, ADMIN_PIC_URL } =
         process.env;
 
-      let admin = await User.findOne({ email: ADMIN_EMAIL });
-      if (!admin) {
-        const salt = await bcrypt.genSalt(10);
-        const hash = await bcrypt.hash(ADMIN_PASSWORD, salt);
-        admin = new User({
-          name: ADMIN_NAME || "Administrator",
-          email: ADMIN_EMAIL,
-          password: hash,
-          role: "admin",
-          profilePicture: ADMIN_PIC_URL ? path.basename(ADMIN_PIC_URL) : "",
-        });
-        await admin.save();
-        console.log("🚀 Admin user seeded:", ADMIN_EMAIL);
+      if (!ADMIN_EMAIL || !ADMIN_PASSWORD) {
+        console.warn("Admin seed skipped: ADMIN_EMAIL or ADMIN_PASSWORD is missing.");
+      } else {
+        const adminEmail = ADMIN_EMAIL.trim().toLowerCase();
+        let admin = await User.findOne({ email: adminEmail });
+
+        if (!admin) {
+          const hash = await bcrypt.hash(ADMIN_PASSWORD, 10);
+          admin = new User({
+            name: ADMIN_NAME || "Administrator",
+            email: adminEmail,
+            password: hash,
+            role: "admin",
+            profilePicture: ADMIN_PIC_URL ? path.basename(ADMIN_PIC_URL) : "",
+          });
+          await admin.save();
+          console.log("🚀 Admin user seeded:", adminEmail);
+        } else {
+          const passwordMatches = await bcrypt.compare(ADMIN_PASSWORD, admin.password);
+          if (!passwordMatches || admin.role !== "admin") {
+            admin.password = await bcrypt.hash(ADMIN_PASSWORD, 10);
+            admin.role = "admin";
+            await admin.save();
+            console.log("Admin account synchronized from environment:", adminEmail);
+          }
+        }
       }
     }
   } catch (seedErr) {
