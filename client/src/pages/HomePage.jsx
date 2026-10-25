@@ -10,36 +10,12 @@ import Typewriter from "../components/common/Typewriter";
 import { spot } from "../utils/spot";
 
 const features = [
-  {
-    icon: Users,
-    title: "AI skill matching",
-    text: "Tell SkillSetu what you can teach and what you want to learn. It compares skills by meaning, not just exact words, and shows how well each person fits with a short reason.",
-  },
-  {
-    icon: Compass,
-    title: "AI learning roadmaps",
-    text: "Pick a skill and get a phase-by-phase plan with topics, exercises, projects and a capstone you can tick off as you go.",
-  },
-  {
-    icon: Bot,
-    title: "Learning assistant",
-    text: "Ask how the platform works or get help with a topic. Answers come from the platform guide and show the sources they used.",
-  },
-  {
-    icon: MessageSquareText,
-    title: "Chat for every session",
-    text: "Each accepted exchange gets a private chat for text, images, video and audio, so you can prepare together.",
-  },
-  {
-    icon: Video,
-    title: "Video calls",
-    text: "Once a session is accepted, you and your partner can meet face to face when the scheduled time starts.",
-  },
-  {
-    icon: Star,
-    title: "Ratings and feedback",
-    text: "After a session, both people can leave a 1 to 5 rating and feedback, so good teachers are easy to spot.",
-  },
+  { icon: Users, title: "AI skill matching", text: "Compare skills by meaning and see a match score with a clear reason." },
+  { icon: Compass, title: "AI learning roadmaps", text: "Follow a skill plan with topics, exercises, projects, and a capstone." },
+  { icon: Bot, title: "Learning assistant", text: "Get topic help or platform guidance with sources for platform answers." },
+  { icon: MessageSquareText, title: "Chat for every session", text: "Prepare together through private text, image, video, and audio chat." },
+  { icon: Video, title: "Video calls", text: "Meet face to face when your accepted session is scheduled to start." },
+  { icon: Star, title: "Ratings and feedback", text: "Rate completed sessions from 1 to 5 and leave helpful feedback." },
 ];
 
 const steps = [
@@ -215,19 +191,12 @@ const Home = () => {
           </div>
         </section>
 
-        {/* ------------------------------------------------------------ features */}
-        <section className="border-y border-slate-200 bg-white py-12 sm:py-16">
+        {/* ------------------------------------------------------------ features illustration */}
+        <section className="border-y border-slate-200 bg-white py-10 sm:py-12">
           <div className="mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:px-8">
-            <Reveal className="mx-auto mb-5 max-w-3xl text-center">
-              <p className="eyebrow">02 / features</p>
-              <h2 className="mt-3 font-display text-3xl font-semibold text-slate-900 sm:text-4xl">
-                Everything you need to learn from real people
-              </h2>
-              <span className="bar-grow mx-auto mt-3 block h-[3px] w-12 rounded-full bg-teal-700" />
-              <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
-                Matching, planning, chat, video and feedback in one place.
-              </p>
-            </Reveal>
+            <SectionHead no="02" label="features" title="Everything you need to learn from real people">
+              Matching, planning, chat, video and feedback in one place.
+            </SectionHead>
             <Reveal className="mx-auto w-full max-w-[1180px]">
               <img
                 src="/hero-image2.png"
@@ -239,17 +208,16 @@ const Home = () => {
                 className="mx-auto block"
               />
             </Reveal>
-
-            <Reveal stagger className="mx-auto mt-5 grid w-full max-w-[1280px] grid-cols-1 items-stretch gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-5">
+            <Reveal stagger className="mx-auto mt-4 grid w-full max-w-[1100px] grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 lg:gap-4">
               {features.map(({ icon: Icon, title, text }, i) => (
-                <div key={title} onMouseMove={spot} style={{ "--i": i }} className="card-fx group flex flex-col bg-white p-5 sm:p-6">
+                <div key={title} onMouseMove={spot} style={{ "--i": i }} className="card-fx group bg-white p-4">
                   <div className="flex items-center gap-3">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-teal-50 text-teal-700 transition-transform duration-300 group-hover:rotate-6 group-hover:scale-105">
-                      <Icon size={19} />
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-teal-50 text-teal-700 transition-transform duration-300 group-hover:rotate-6 group-hover:scale-105">
+                      <Icon size={17} />
                     </span>
-                    <h3 className="font-display text-base font-semibold leading-snug text-slate-900 sm:text-lg">{title}</h3>
+                    <h3 className="font-display text-base font-semibold leading-snug text-slate-900">{title}</h3>
                   </div>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{text}</p>
+                  <p className="mt-2 text-sm leading-snug text-slate-600">{text}</p>
                 </div>
               ))}
             </Reveal>
@@ -258,17 +226,34 @@ const Home = () => {
 
         {/* ------------------------------------------------------------ FAQ */}
         <section className="py-16 sm:py-24">
-          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-            <SectionHead no="03" label="faq" title="Questions, answered">
-              The basics of how exchanges work on SkillSetu.
-            </SectionHead>
-            <Reveal stagger className="space-y-3">
-              {faqs.map((f, i) => (
-                <div key={f.q} style={{ "--i": i }}>
-                  <FaqItem q={f.q} a={f.a} index={i} />
-                </div>
-              ))}
+          <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-8 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12 lg:px-8">
+            <Reveal className="mx-auto w-full max-w-[520px]">
+              <img
+                src="/images/hero-image3.png"
+                width="1250"
+                height="1250"
+                alt="A learner thinking through a question, with books about learning and teaching"
+                loading="lazy"
+                className="block h-auto w-full object-contain"
+              />
             </Reveal>
+            <div className="w-full">
+              <Reveal className="mb-8 text-center lg:text-left">
+                <p className="eyebrow">03 / faq</p>
+                <h2 className="mt-3 font-display text-3xl font-semibold text-slate-900 sm:text-4xl">Questions, answered</h2>
+                <span className="bar-grow mx-auto mt-4 block h-[3px] w-12 rounded-full bg-teal-700 lg:mx-0" />
+                <p className="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base">
+                  The basics of how exchanges work on SkillSetu.
+                </p>
+              </Reveal>
+              <Reveal stagger className="space-y-3">
+                {faqs.map((f, i) => (
+                  <div key={f.q} style={{ "--i": i }}>
+                    <FaqItem q={f.q} a={f.a} index={i} />
+                  </div>
+                ))}
+              </Reveal>
+            </div>
           </div>
         </section>
       </main>
