@@ -1,0 +1,484 @@
+@import "tailwindcss";
+
+/*
+  SkillSetu design system: paper background, slate accent, Fredoka headings,
+  Inter body, JetBrains Mono labels. (Same visual language as the portfolio, slate instead of blue.)
+*/
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Fredoka", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Portfolio palette: ink + electric blue on warm paper. The default "slate" and "teal" scales are
+     re-pointed here, so existing classes (text-slate-600, bg-slate-100, hover:bg-teal-700 ...) follow it. */
+  --color-slate-50: #fafaf8;
+  --color-slate-100: #eef4ff;
+  --color-slate-200: #dadada;
+  --color-slate-300: #c6c6c6;
+  --color-slate-400: #8f8f8f;
+  --color-slate-500: #6b6b6b;
+  --color-slate-600: #484848;
+  --color-slate-700: #2b2b2b;
+  --color-slate-800: #111111;
+  --color-slate-900: #111111;
+  --color-slate-950: #0a0a0a;
+
+  --color-teal-50: #eef4ff;
+  --color-teal-100: #dce8ff;
+  --color-teal-200: #bcd2ff;
+  --color-teal-300: #8fb4ff;
+  --color-teal-400: #5b8ff8;
+  --color-teal-500: #2166f3;
+  --color-teal-600: #2166f3;
+  --color-teal-700: #2166f3;
+  --color-teal-800: #1a52c2;
+  --color-teal-900: #143e94;
+}
+
+:root {
+  --paper: #fffefc;
+  --alt: #fafaf8;
+  --ink: #111111;
+  --muted: #484848;
+  --line: #dadada;
+  --accent: #2166f3;
+  --accent-soft: #7c9cff;
+  --shadow-card: 0 14px 30px -18px rgba(17, 17, 17, 0.25);
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #2166f3 #fafaf8;
+}
+
+html,
+body,
+#root {
+  min-width: 0;
+  overflow-x: hidden;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Fredoka", Inter, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+img,
+video,
+iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+/* Hide native browser password reveal/clear icons so only custom toggle shows */
+input::-ms-reveal,
+input::-ms-clear {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  background: #2166f3;
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid #2166f3;
+  outline-offset: 2px;
+}
+
+.register-page {
+  scrollbar-width: none;
+}
+.register-page::-webkit-scrollbar {
+  display: none;
+}
+
+.session-list {
+  scrollbar-width: none;
+}
+.session-list::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+.session-list:hover {
+  scrollbar-width: thin;
+}
+.session-list:hover::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.session-list::-webkit-scrollbar-thumb {
+  background-color: rgba(33, 102, 243, 0.45);
+  border-radius: 999px;
+}
+
+.notification-bell {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  z-index: 100;
+}
+
+/* legacy helpers still used by a few components */
+.brand-gradient-text {
+  background: linear-gradient(100deg, #2166f3 30%, #7c9cff 50%, #2166f3 70%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: sheen 4s linear infinite;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-card);
+}
+
+.primary-btn,
+.btn-primary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  overflow: hidden;
+  border-radius: 9999px;
+  padding: 0.75rem 1.4rem;
+  font-weight: 600;
+  background: #111111;
+  color: #fff;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.primary-btn:hover,
+.btn-primary:hover {
+  background: #2166f3;
+}
+.primary-btn:active,
+.btn-primary:active,
+.btn-secondary:active {
+  transform: scale(0.97);
+}
+.primary-btn::after,
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transform: translateX(-120%);
+  transition: transform 0.7s ease;
+  background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.35) 50%, transparent 65%);
+}
+.primary-btn:hover::after,
+.btn-primary:hover::after {
+  transform: translateX(120%);
+}
+
+.secondary-btn,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 9999px;
+  padding: 0.75rem 1.4rem;
+  font-weight: 600;
+  background: #fff;
+  color: #111111;
+  border: 1px solid var(--line);
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.secondary-btn:hover,
+.btn-secondary:hover {
+  border-color: #2166f3;
+  color: #2166f3;
+}
+
+/* ---------------------------------------------------------------- motion */
+.dot-grid {
+  background-image: radial-gradient(rgba(17, 17, 17, 0.09) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* dots that fade out towards the illustration, so the picture melts into the page */
+.dot-fade {
+  background-image: radial-gradient(rgba(17, 17, 17, 0.09) 1px, transparent 1px);
+  background-size: 22px 22px;
+  -webkit-mask-image: linear-gradient(to right, #000 0%, #000 38%, transparent 68%);
+  mask-image: linear-gradient(to right, #000 0%, #000 38%, transparent 68%);
+}
+@media (max-width: 1023px) {
+  .dot-fade {
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 36%, transparent 60%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 36%, transparent 60%);
+  }
+}
+
+/* section underline draws itself when the section scrolls into view */
+.reveal .bar-grow {
+  animation: none;
+  transform: scaleX(0);
+  transition: transform 0.9s 0.3s ease;
+}
+.reveal.in .bar-grow {
+  transform: scaleX(1);
+}
+
+.rise {
+  animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+}
+
+.reveal {
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal:not(.in) {
+  opacity: 0;
+  transform: translateY(26px);
+}
+.stg:not(.in) > * {
+  opacity: 0;
+}
+.stg.in > * {
+  animation: pop 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+  animation-delay: calc(var(--i, 0) * 90ms);
+}
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+}
+
+.caret {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 3px;
+  vertical-align: -0.12em;
+  background: #2166f3;
+  animation: blink 1s steps(1) infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.blob {
+  position: absolute;
+  z-index: 0;
+  border-radius: 9999px;
+  filter: blur(70px);
+  pointer-events: none;
+  animation: drift 14s ease-in-out infinite;
+}
+.blob-b {
+  animation-duration: 18s;
+  animation-direction: reverse;
+}
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(40px, 30px) scale(1.15);
+  }
+}
+
+.float-y {
+  animation: float 7s ease-in-out infinite;
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.shimmer {
+  background: linear-gradient(100deg, #2166f3 30%, #7c9cff 50%, #2166f3 70%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: sheen 4s linear infinite;
+}
+@keyframes sheen {
+  to {
+    background-position: -220% 0;
+  }
+}
+
+.bar-grow {
+  transform-origin: left;
+  animation: grow 0.9s 0.2s ease backwards;
+}
+@keyframes grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.scroll-bar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 60;
+  height: 3px;
+  transform-origin: left;
+  transform: scaleX(0);
+  background: linear-gradient(90deg, #2166f3, #7c9cff);
+}
+
+/* Interactive card: lift, slate top line, cursor glow, gentle 3D tilt (see utils/spot.js) */
+.card-fx {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.2s ease-out, translate 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.card-fx:hover {
+  translate: 0 -4px;
+  border-color: #2166f3;
+  box-shadow: 0 18px 34px -22px rgba(17, 17, 17, 0.55);
+}
+.card-fx::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  height: 2px;
+  width: 0;
+  border-top-left-radius: 14px;
+  background: linear-gradient(90deg, #2166f3, #7c9cff);
+  transition: width 0.5s ease;
+  pointer-events: none;
+}
+.card-fx:hover::before {
+  width: 100%;
+}
+.card-fx::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  border-radius: inherit;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(33, 102, 243, 0.1), transparent 70%);
+}
+.card-fx:hover::after {
+  opacity: 1;
+}
+
+.link-u {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0 1px;
+  padding-bottom: 2px;
+  transition: background-size 0.3s ease, color 0.2s ease;
+}
+.link-u:hover {
+  background-size: 100% 1px;
+}
+
+.eyebrow {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #2166f3;
+}
+
+@keyframes drop {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+.menu-drop {
+  animation: drop 0.25s ease;
+}
+
+.page-in {
+  animation: fade-in 0.45s ease-out backwards;
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

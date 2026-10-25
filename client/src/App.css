@@ -1,0 +1,5 @@
+/* Global layout resets live in index.css. Kept for backwards compatibility with App.jsx import. */
+#root {
+  min-height: 100vh;
+  min-height: 100dvh;
+}

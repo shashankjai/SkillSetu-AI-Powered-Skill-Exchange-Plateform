@@ -1,0 +1,12 @@
+node_modules/
+.env
+.env.*
+!.env.example
+dist/
+# user uploads are runtime data, never commit them
+backend/uploads/*
+!backend/uploads/.gitkeep
+backend/uploads/profile-pictures/*
+!backend/uploads/profile-pictures/.gitkeep
+*.log
+.DS_Store
